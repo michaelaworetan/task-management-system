@@ -48,3 +48,6 @@ let completeTask = async (req, res) => {
         res.status(400).json({ message: "Error!, task not completed" })
     }
 };
+
+//export code functionalities
+module.exports = { createTask, getTasks, completeTask };
