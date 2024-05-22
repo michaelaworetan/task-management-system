@@ -42,7 +42,7 @@ taskSchema.pre('save', function (next) {
       this.deadline = new Date(this.deadline);
     }
     next();
-  });
+});
 
 // Creating a model named 'Task' based on the defined schema and exporting it
 const Task = mongoose.model('Task', taskSchema);
