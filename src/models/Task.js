@@ -20,7 +20,14 @@ const taskSchema = new mongoose.Schema({
     // Defining a field "deadline" of type Date which is required
     deadline: {
         type: Date,
-        required: true
+        required: true,
+        // Validate the date format
+        validate: {
+            validator: function (v) {
+            return !isNaN(Date.parse(v));
+            },
+            message: props => `${props.value} is not a valid date!`
+        }
     },
     // Defining a field "status" of type String with a default value of 'pending'
     status: {
@@ -28,6 +35,14 @@ const taskSchema = new mongoose.Schema({
         default: 'pending'
     },
 });
+
+// Pre-save middleware to handle different date formats
+taskSchema.pre('save', function (next) {
+    if (this.deadline && typeof this.deadline === 'string') {
+      this.deadline = new Date(this.deadline);
+    }
+    next();
+  });
 
 // Creating a model named 'Task' based on the defined schema and exporting it
 const Task = mongoose.model('Task', taskSchema);
