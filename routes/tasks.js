@@ -12,7 +12,7 @@ const validateTask = [
   body('title').notEmpty().withMessage('Title is required'),
   body('description').optional().isString(),
   body('assignedTo').optional().isString(),
-  body('deadline').optional().isISO8601().toDate(),  // Validate deadline: it is optional and must be a valid ISO 8601 date if provided
+//   body('deadline').optional().isISO8601().toDate(),  // Validate deadline: it is optional and must be a valid ISO 8601 date if provided
   body('completed').optional().isBoolean(),
 ];
 

@@ -16,6 +16,10 @@ exports.createTask = async (req, res) => {
   try {
     // Destructure the task details from the request body
     const { title, description, assignedTo, deadline } = req.body;
+    // Validate  date deadline
+    if (deadline && isNaN(Date.parse(deadline))) {
+        return res.status(400).json({ error: 'Invalid date format for deadline' });
+    }
     // Create a new Task instance with the provided details
     const task = new Task({ title, description, assignedTo, deadline });
     // Save the task to the database
